@@ -23,19 +23,24 @@ saveToFile(listSeason2, 2)
 saveToFile(listSeason3, 3)
 saveToFile(listSeason4, 4)
 
+saveInDataBase(listSeason1, 1)
+saveInDataBase(listSeason2, 2)
+saveInDataBase(listSeason3, 3)
+saveInDataBase(listSeason4, 4)
 
-## !!! this function is not finish! i have some problems to make it work
+#saving data frames as tables in data base
+#PROBLEM: on GitHub muxiumu file size os 100 MB, so it's definitely too little for our big data :)
+#I think keeping data in small txt files is better idea (we can keep them on GitHub)
+con <- dbConnect(SQLite(), "database.db")
 saveInDataBase <- function(dataFrameList, numOfSeason){
-   con <- dbConnect(SQLite(), "database.db")
    names <- makeNames(dataFrameList, numOfSeason)
    n <- length(dataFrameList)
    for (i in 1:n){
       dbWriteTable(con, names[i], dataFrameList[[i]])
    }
-   dbDisconnect(con)
 }
 dbListTables(con)
-
+dbDisconnect(con)
 
 #function for saving dataframes to ".txt" file with appropriate name
 saveToFile <- function(dataFrameList, numOfSeason){
@@ -52,9 +57,9 @@ makeNames <- function(dataFrameList, numOfSeason){
    names <- character(n)
    for (i in 1:n){
       if (i <= 9){
-         names[i] <- paste("aso-s0", numOfSeason, "e0", i, sep="")
+         names[i] <- paste("aso_s0", numOfSeason, "e0", i, sep="")
       } else {
-         names[i] <- paste("aso-s0", numOfSeason, "e", i, sep="")
+         names[i] <- paste("aso_s0", numOfSeason, "e", i, sep="")
       }
    }
    return(names)
