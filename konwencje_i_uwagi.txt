@@ -1,0 +1,10 @@
+Proponuję następującą konwencję nazw:
+
+- dla każdego serwisu wybieramy 3 literowy kod (od nazwy) np. aso
+- R-owe kody do pierwszej części nazywamy kod-webscraping.R np. aso-webscraping
+- tabele dla poszczególnych odcinków nazywamy kod-SnrsezonuEnrepizodu, np. aso-s01e01
+- w tabeli mamy 3 kolumny o nazwach nick, date, comment
+
+Myślę, że pobawimy się tym, żeby wrzucić te tabelki do bazy ale w razie jakby nam potem nie szło 
+z wydobywaniem ich z tej bazy to nie zaszkodzi mieć też wersji w postaci pliku txt. 
+Czyli każda tabelka w osobnym pliku txt (o nazwie jak nazwa tabllki)
