@@ -47,7 +47,8 @@ saveToFile <- function(dataFrameList, numOfSeason){
    names <- paste(makeNames(dataFrameList, numOfSeason), ".txt", sep="")
    n <- length(dataFrameList)
    for (i in 1:n){
-      write.table(dataFrameList[[i]], names[i], quote=FALSE, sep="\t")  
+      #write.table(dataFrameList[[i]], names[i], quote=FALSE, sep="\t") 
+      write.csv(dataFrameList[[i]], names[i], row.names=FALSE)
    }
 }
 

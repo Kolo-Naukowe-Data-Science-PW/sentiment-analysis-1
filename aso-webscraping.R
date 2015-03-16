@@ -1,6 +1,7 @@
 # Data from http://asoiaf.westeros.org/index.php/forum/ - forum in which all episodes are discussed
 library(rvest)
 library(stringi)
+library(tm)
 
 #url for seasons 
 urlSeason1 <- "http://asoiaf.westeros.org/index.php/forum/40-season-1/"
@@ -110,8 +111,13 @@ makeOnePageDataFrame <- function(urlOnePage){
    
    comment <- rawData[seq(3,n,3)]
    comment <- stri_trim_both(comment)
+   corpus <- Corpus(VectorSource(comment))
+   corpus <- tm_map(corpus, stripWhitespace)
+   corpus <- tm_map(corpus, removePunctuation)
+   corpus <- tm_map(corpus, content_transformer(tolower))
    
-   onePageDataFrame <- data.frame("nick"=nick, "date"=date, "comment"=comment)
+   onePageDataFrame <- data.frame("nick"=nick, "date"=date, "comment"=unlist(sapply(corpus, `[`, "content")),
+                                                                             stringsAsFactors=FALSE)
    return(onePageDataFrame) 
 }
 
