@@ -25,6 +25,32 @@ episodes <- unlist(episodes)
 episodes <- lapply(episodes, function(x) stri_paste("http://www.tv.com", x, collapse = ""))
 episodes <- unlist(episodes)
 
+#for(i in 1:4){
+#   episode_i <- character(10)
+#   episode <- character(10)
+#   episode3 <- character(10)
+#   episode4 <- character(10)
+#}
+#
+#n <- length(episode1)
+#for(i in seq_along(names)){
+#   names[[i]][10] <- stri_paste("tvc_s0", i, "e10")
+#   for(j in 1:9){
+#      names[[i]][j] <- stri_paste("tvc_s0", i, "e0", j)
+#   }
+#}
+#unlist(names)
+#length(names)
+
+names <- c("tvc_s01e01","tvc_s01e02","tvc_s01e03","tvc_s01e04","tvc_s01e05",
+           "tvc_s01e06","tvc_s01e07","tvc_s01e08","tvc_s01e09","tvc_s01e10",
+           "tvc_s02e01","tvc_s02e02","tvc_s02e03","tvc_s02e04","tvc_s02e05",
+           "tvc_s02e06","tvc_s02e07","tvc_s02e08","tvc_s02e09","tvc_s02e10",
+           "tvc_s03e01","tvc_s03e02","tvc_s03e03","tvc_s03e04","tvc_s03e05",
+           "tvc_s03e06","tvc_s03e07","tvc_s03e08","tvc_s03e09","tvc_s03e10",
+           "tvc_s04e01","tvc_s04e02","tvc_s04e03","tvc_s04e04","tvc_s04e05",
+           "tvc_s04e06","tvc_s04e07","tvc_s04e08","tvc_s04e09","tvc_s04e10")
+
 n <- length(episodes)
 everything <- list(n)
 #the elements of the above list will be data frames
@@ -57,6 +83,9 @@ for(i in seq_along(episodes)){
    
    everything[[i]] <- data.frame(nick = users, date = dates, 
                                  comment = comments)
+
+   main_path <- "C:/Dane/Pawel_2/PW/Data_Science"
+   write.table(everything[[i]], file = stri_paste(main_path, "/", names[i], ".txt"))
 }   
 everything
 
